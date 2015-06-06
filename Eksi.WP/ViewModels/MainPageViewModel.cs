@@ -1,5 +1,6 @@
 ﻿using Eksi.Models;
 using Eksi.SDK;
+using Eksi.WP.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Eksi.WP.ViewModels
                 NotifyPropertyChanged();
                 if (value != null)
                 {
-                    App.NavigationService.Navigate(typeof(Posts), PopularsSelectedItem);
+                    App.NavigationService.Navigate(typeof(EntryDetailsPage), PopularsSelectedItem);
                 }
             }
         }

@@ -10,10 +10,11 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.Foundation;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace Eksi.WP.ViewModels
 {
-    public class PostsViewModel : BaseViewModel
+    public class EntryDetailsPageViewModel : BaseViewModel
     {
 
         private bool isInProgress;
@@ -32,11 +33,11 @@ namespace Eksi.WP.ViewModels
             set { selectedPopularItem = value; NotifyPropertyChanged(); }
         }
 
-        private List<Entry> postsList;
-        public List<Entry> PostsList
+        private ObservableCollection<Entry> _entryList;
+        public ObservableCollection<Entry> EntryList
         {
-            get { return postsList; }
-            set { postsList = value; NotifyPropertyChanged(); }
+            get { return _entryList; }
+            set { _entryList = value; NotifyPropertyChanged(); }
         }
 
         private ICommand iSend;
@@ -49,7 +50,7 @@ namespace Eksi.WP.ViewModels
 
         public RelayCommand BackRelayCommand;
 
-        public PostsViewModel()
+        public EntryDetailsPageViewModel()
         {
             Initialize();
         }
@@ -72,7 +73,7 @@ namespace Eksi.WP.ViewModels
             Window.Current.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
             {
                 PostsClient client = new PostsClient();
-                PostsList = await client.GetPostsAsync(SelectedPopularItem);
+                EntryList = await client.GetPostsAsync(SelectedPopularItem);
                 IsInProgress = false;
             });
         }
